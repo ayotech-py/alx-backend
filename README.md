@@ -1,2 +1,2 @@
-# alx-backend
+# ALX Backend
 Repository of backend-specific projects.
