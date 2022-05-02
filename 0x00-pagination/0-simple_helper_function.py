@@ -3,6 +3,7 @@
     Simple helper function.
 '''
 
+
 def index_range(page, page_size):
     '''
         Returns the range of indexes for a given page.
