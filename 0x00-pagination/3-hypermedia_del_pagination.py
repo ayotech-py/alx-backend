@@ -40,7 +40,6 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        # sourcery skip: inline-immediately-returned-variable, use-named-expression
         """ Deletion-resilient hypermedia pagination """
 
         idx_dataset = self.indexed_dataset()
