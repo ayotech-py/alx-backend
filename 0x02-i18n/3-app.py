@@ -3,7 +3,7 @@
     Use Babel to get user locale.
 '''
 
-from flask_babel import Babel, _
+from flask_babel import Babel
 from flask import Flask, render_template, request
 
 
@@ -34,7 +34,7 @@ def helloWorld() -> str:
 @babel.localeselector
 def get_locale() -> str:
     '''
-        Get user locale.
+        Get user locale to serve matching translation.
     '''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
