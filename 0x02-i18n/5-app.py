@@ -5,7 +5,7 @@
 
 from flask_babel import Babel
 from flask import Flask, render_template, request, g
-from typing import Union, Dict
+from typing import Union
 
 app = Flask(__name__, template_folder='templates')
 babel = Babel(app)
@@ -30,21 +30,32 @@ users = {
 }
 
 
-def get_user() -> Union[Dict, None]:
+def get_user() -> Union[dict, None]:
     '''
         Get user from session as per variable.
     '''
-    if login_as := request.args.get('login_as'):
-        return users.get(int(login_as))
-    return None
+    try:
+        login_as = request.args.get('login_as', None)
+        user = users[int(login_as)]
+    except Exception:
+
+
 
 @app.before_request
-def before_request() -> None:
+def before_request():
     '''
         Operations before request.
     '''
     user = get_user()
     g.user = user
+
+
+@app.route('/', methods=['GET'], strict_slashes=False)
+def helloWorld() -> str:
+    '''
+        Render template for Babel usage.
+    '''
+    return render_template('5-index.html')
 
 
 @babel.localeselector
@@ -56,14 +67,6 @@ def get_locale() -> str:
     if locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-@app.route('/', methods=['GET'], strict_slashes=False)
-def helloWorld() -> str:
-    '''
-        Render template for Babel usage.
-    '''
-    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
