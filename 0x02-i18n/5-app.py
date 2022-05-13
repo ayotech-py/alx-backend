@@ -38,7 +38,7 @@ def get_user() -> Union[dict, None]:
         login_as = request.args.get('login_as', None)
         user = users[int(login_as)]
     except Exception:
-
+        user = None
 
 
 @app.before_request
