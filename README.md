@@ -1,2 +1,1 @@
-# ALX Backend
-Repository of backend-specific projects.
+Backend pagination
